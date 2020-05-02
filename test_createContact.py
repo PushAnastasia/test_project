@@ -13,14 +13,14 @@ class TestCreateContact():
   
   def test_createContact(self):
     self.open_home_page()
-    self.login()
+    self.login(username="test0001push@gmail.com", password="plokijuh1")
     self.open_add_contact_page()
-    self.create_contact()
+    self.create_contact(name="TestContact")
 
-  def create_contact(self):
+  def create_contact(self, name):
     # fill Contact form
     self.driver.find_element(By.ID, "CompanyName").click()
-    self.driver.find_element(By.ID, "CompanyName").send_keys("TestContact")
+    self.driver.find_element(By.ID, "CompanyName").send_keys(name)
     self.driver.find_element(By.CSS_SELECTOR, ".column:nth-child(1) > .grey-block").click()
     # submit creation
     self.driver.find_element(By.CSS_SELECTOR, ".btn-save").click()
@@ -29,13 +29,13 @@ class TestCreateContact():
     self.driver.find_element(By.CSS_SELECTOR, ".create-block .link-content").click()
     self.driver.find_element(By.LINK_TEXT, "Contact").click()
 
-  def login(self):
+  def login(self, username, password):
 
     self.driver.find_element(By.LINK_TEXT, "Login").click()
     self.driver.find_element(By.ID, "email-address").click()
-    self.driver.find_element(By.ID, "email-address").send_keys("test0001push@gmail.com")
+    self.driver.find_element(By.ID, "email-address").send_keys(username)
     self.driver.find_element(By.ID, "cpassword").click()
-    self.driver.find_element(By.ID, "cpassword").send_keys("plokijuh1")
+    self.driver.find_element(By.ID, "cpassword").send_keys(password)
     self.driver.find_element(By.ID, "btnLogin").click()
 
   def open_home_page(self):
