@@ -2,6 +2,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import unittest
+from group import Group
 
 class TestCreateContact():
   def setup_method(self, method):
@@ -15,12 +16,18 @@ class TestCreateContact():
     self.open_home_page()
     self.login(username="test0001push@gmail.com", password="plokijuh1")
     self.open_add_contact_page()
-    self.create_contact(name="TestContact")
+    self.create_contact(Group(name="TestContact"))
 
-  def create_contact(self, name):
+  def test_createContactClient(self):
+    self.open_home_page()
+    self.login(username="test0001push@gmail.com", password="plokijuh1")
+    self.open_add_contact_page()
+    self.create_contact(Group(name="TestClient"))
+
+  def create_contact(self, group):
     # fill Contact form
     self.driver.find_element(By.ID, "CompanyName").click()
-    self.driver.find_element(By.ID, "CompanyName").send_keys(name)
+    self.driver.find_element(By.ID, "CompanyName").send_keys(group.name)
     self.driver.find_element(By.CSS_SELECTOR, ".column:nth-child(1) > .grey-block").click()
     # submit creation
     self.driver.find_element(By.CSS_SELECTOR, ".btn-save").click()
