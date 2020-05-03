@@ -13,18 +13,15 @@ class TestCreateContact():
     self.driver.quit()
   
   def test_createContact(self):
-    self.open_home_page()
     self.login(username="test0001push@gmail.com", password="plokijuh1")
-    self.open_add_contact_page()
     self.create_contact(Group(name="TestContact"))
 
   def test_createContactClient(self):
-    self.open_home_page()
     self.login(username="test0001push@gmail.com", password="plokijuh1")
-    self.open_add_contact_page()
     self.create_contact(Group(name="TestClient"))
 
   def create_contact(self, group):
+    self.open_add_contact_page()
     # fill Contact form
     self.driver.find_element(By.ID, "CompanyName").click()
     self.driver.find_element(By.ID, "CompanyName").send_keys(group.name)
@@ -38,6 +35,7 @@ class TestCreateContact():
 
   def login(self, username, password):
 
+    self.open_home_page()
     self.driver.find_element(By.LINK_TEXT, "Login").click()
     self.driver.find_element(By.ID, "email-address").click()
     self.driver.find_element(By.ID, "email-address").send_keys(username)
