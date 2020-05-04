@@ -1,50 +1,22 @@
 # -*- coding: utf-8 -*-
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-import unittest
+# from selenium import webdriver
+# from selenium.webdriver.common.by import By
+# import unittest
+import pytest
 from group import Group
+from application import Application
 
-class TestCreateContact():
-  def setup_method(self, method):
-    self.driver = webdriver.Chrome('C:\Program Files\Chromedriver\chromedriver.exe')
-    self.vars = {}
-  
-  def teardown_method(self, method):
-    self.driver.quit()
-  
-  def test_createContact(self):
-    self.login(username="test0001push@gmail.com", password="plokijuh1")
-    self.create_contact(Group(name="TestContact"))
+@pytest.fixture
+def app(request):
+  fixture = Application()
+  request.addfinalizer(fixture.destroy)
+  return fixture
 
-  def test_createContactClient(self):
-    self.login(username="test0001push@gmail.com", password="plokijuh1")
-    self.create_contact(Group(name="TestClient"))
+def test_createContact(app):
+  app.login(username="test0001push@gmail.com", password="plokijuh1")
+  app.create_contact(Group(name="TestContact"))
 
-  def create_contact(self, group):
-    self.open_add_contact_page()
-    # fill Contact form
-    self.driver.find_element(By.ID, "CompanyName").click()
-    self.driver.find_element(By.ID, "CompanyName").send_keys(group.name)
-    self.driver.find_element(By.CSS_SELECTOR, ".column:nth-child(1) > .grey-block").click()
-    # submit creation
-    self.driver.find_element(By.CSS_SELECTOR, ".btn-save").click()
+def test_createContactClient(app):
+  app.login(username="test0001push@gmail.com", password="plokijuh1")
+  app.create_contact(Group(name="TestClient"))
 
-  def open_add_contact_page(self):
-    self.driver.find_element(By.CSS_SELECTOR, ".create-block .link-content").click()
-    self.driver.find_element(By.LINK_TEXT, "Contact").click()
-
-  def login(self, username, password):
-
-    self.open_home_page()
-    self.driver.find_element(By.LINK_TEXT, "Login").click()
-    self.driver.find_element(By.ID, "email-address").click()
-    self.driver.find_element(By.ID, "email-address").send_keys(username)
-    self.driver.find_element(By.ID, "cpassword").click()
-    self.driver.find_element(By.ID, "cpassword").send_keys(password)
-    self.driver.find_element(By.ID, "btnLogin").click()
-
-  def open_home_page(self):
-
-    self.driver.get("https://skyt.qa.sharp.nixdev.co/")
-    self.driver.set_window_size(1936, 1056)
-  
