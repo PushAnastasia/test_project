@@ -18,3 +18,15 @@ class GroupHelper:
         self.driver = self.app.driver
         self.driver.find_element(By.CSS_SELECTOR, ".create-block .link-content").click()
         self.driver.find_element(By.LINK_TEXT, "Contact").click()
+
+    def inactive_first_contact(self):
+        self.driver = self.app.driver
+        # open address book page
+        self.driver.find_element(By.LINK_TEXT, "Address Book").click()
+        self.driver.find_element(By.ID, "AllContacts").click()
+        # select first contact
+        self.driver.find_element(By.NAME, "contacts").click()
+        # submit inactivation
+        self.driver.find_element(By.LINK_TEXT, "Activities").click()
+        self.driver.find_element(By.LINK_TEXT, "Set Inactive").click()
+        self.driver.find_element(By.CSS_SELECTOR, ".btn .btn-delete .btn-submit-confirm-dialog").click()
