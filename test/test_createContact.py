@@ -13,10 +13,10 @@ def app(request):
   return fixture
 
 def test_createContact(app):
-  app.login(username="test0001push@gmail.com", password="plokijuh1")
+  app.session.login(username="test0001push@gmail.com", password="plokijuh1")
   app.create_contact(Group(name="TestContact"))
 
 def test_createContactClient(app):
-  app.login(username="test0001push@gmail.com", password="plokijuh1")
+  app.session.login(username="test0001push@gmail.com", password="plokijuh1")
   app.create_contact(Group(name="TestClient"))
 

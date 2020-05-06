@@ -1,5 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from fixture.session import SessionHelper
 
 
 class Application:
@@ -7,6 +8,7 @@ class Application:
     def __init__(self):
         self.driver = webdriver.Chrome('C:\Program Files\Chromedriver\chromedriver.exe')
         self.vars = {}
+        self.session = SessionHelper(self)
 
     def create_contact(self, group):
         self.open_add_contact_page()
@@ -20,15 +22,6 @@ class Application:
     def open_add_contact_page(self):
         self.driver.find_element(By.CSS_SELECTOR, ".create-block .link-content").click()
         self.driver.find_element(By.LINK_TEXT, "Contact").click()
-
-    def login(self, username, password):
-        self.open_home_page()
-        self.driver.find_element(By.LINK_TEXT, "Login").click()
-        self.driver.find_element(By.ID, "email-address").click()
-        self.driver.find_element(By.ID, "email-address").send_keys(username)
-        self.driver.find_element(By.ID, "cpassword").click()
-        self.driver.find_element(By.ID, "cpassword").send_keys(password)
-        self.driver.find_element(By.ID, "btnLogin").click()
 
     def open_home_page(self):
         self.driver.get("https://skyt.qa.sharp.nixdev.co/")
