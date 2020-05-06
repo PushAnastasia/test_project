@@ -14,9 +14,9 @@ def app(request):
 
 def test_createContact(app):
   app.session.login(username="test0001push@gmail.com", password="plokijuh1")
-  app.create_contact(Group(name="TestContact"))
+  app.group.create(Group(name="TestContact"))
 
 def test_createContactClient(app):
   app.session.login(username="test0001push@gmail.com", password="plokijuh1")
-  app.create_contact(Group(name="TestClient"))
+  app.group.create(Group(name="TestClient"))
 
