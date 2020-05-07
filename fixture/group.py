@@ -22,11 +22,11 @@ class GroupHelper:
     def inactive_first_contact(self):
         self.driver = self.app.driver
         # open address book page
-        self.driver.find_element(By.LINK_TEXT, "Address Book").click()
+        self.driver.find_element(By.ID, "AddressBook").click()
         self.driver.find_element(By.ID, "AllContacts").click()
         # select first contact
-        self.driver.find_element(By.NAME, "contacts").click()
+        self.driver.find_element(By.CSS_SELECTOR, ".list-body .text-cell .icon-check").click()
         # submit inactivation
         self.driver.find_element(By.LINK_TEXT, "Activities").click()
         self.driver.find_element(By.LINK_TEXT, "Set Inactive").click()
-        self.driver.find_element(By.CSS_SELECTOR, ".btn .btn-delete .btn-submit-confirm-dialog").click()
+        self.driver.find_element(By.CSS_SELECTOR, ".popup-content .btn-delete").click()
