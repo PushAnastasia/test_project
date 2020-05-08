@@ -2,5 +2,5 @@
 
 class Group:
 
-    def __init__(self, name):
+    def __init__(self, name=None):
         self.name = name

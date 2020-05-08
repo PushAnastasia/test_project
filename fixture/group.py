@@ -7,12 +7,17 @@ class GroupHelper:
     def create(self, group):
         self.driver = self.app.driver
         self.open_add_contact_page()
-        # fill Contact form
-        self.driver.find_element(By.ID, "CompanyName").click()
-        self.driver.find_element(By.ID, "CompanyName").send_keys(group.name)
-        self.driver.find_element(By.CSS_SELECTOR, ".column:nth-child(1) > .grey-block").click()
+        self.fill_contact_form(group)
         # submit creation
         self.driver.find_element(By.CSS_SELECTOR, ".btn-save").click()
+
+    def fill_contact_form(self, group):
+        self.driver = self.app.driver
+        if group.name is not None:
+            self.driver.find_element(By.ID, "CompanyName").click()
+            self.driver.find_element(By.ID, "CompanyName").clear()
+            self.driver.find_element(By.ID, "CompanyName").send_keys(group.name)
+            self.driver.find_element(By.CSS_SELECTOR, ".column:nth-child(1) > .grey-block").click()
 
     def open_add_contact_page(self):
         self.driver = self.app.driver
@@ -21,12 +26,27 @@ class GroupHelper:
 
     def inactive_first_contact(self):
         self.driver = self.app.driver
-        # open address book page
-        self.driver.find_element(By.ID, "AddressBook").click()
-        self.driver.find_element(By.ID, "AllContacts").click()
+        self.opend_address_book_page()
         # select first contact
         self.driver.find_element(By.CSS_SELECTOR, ".list-body .text-cell .icon-check").click()
         # submit inactivation
         self.driver.find_element(By.LINK_TEXT, "Activities").click()
         self.driver.find_element(By.LINK_TEXT, "Set Inactive").click()
         self.driver.find_element(By.CSS_SELECTOR, ".popup-content .btn-delete").click()
+
+    def opend_address_book_page(self):
+        self.driver = self.app.driver
+        self.driver.find_element(By.ID, "AddressBook").click()
+        self.driver.find_element(By.ID, "AllContacts").click()
+
+    def modify_first_contact(self, new_group_data):
+        self.driver = self.app.driver
+        self.opend_address_book_page()
+        # select first contact
+        self.driver.find_element(By.CSS_SELECTOR, ".list-body .text-cell .col-organization").click()
+        # open edit contact page
+        self.driver.find_element(By.CSS_SELECTOR, ".btn-edit").click()
+        # edit contact form
+        self.fill_contact_form(new_group_data)
+        # submit modification
+        self.driver.find_element(By.CSS_SELECTOR, ".btn-save").click()
