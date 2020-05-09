@@ -43,9 +43,10 @@ class GroupHelper:
         self.driver = self.app.driver
         self.opend_address_book_page()
         # select first contact
-        self.driver.find_element(By.CSS_SELECTOR, ".list-body .text-cell .col-organization").click()
+        self.driver.find_element(By.LINK_TEXT, "New Contact2").click()
         # open edit contact page
-        self.driver.find_element(By.CSS_SELECTOR, ".btn-edit").click()
+        self.driver.find_element(By.CSS_SELECTOR, ".page-block .list-footer .btn-holder .btn-edit").click()
+        self.driver.implicitly_wait(10)
         # edit contact form
         self.fill_contact_form(new_group_data)
         # submit modification
