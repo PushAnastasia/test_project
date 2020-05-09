@@ -8,9 +8,17 @@ class Application:
 
     def __init__(self):
         self.driver = webdriver.Chrome('C:\Program Files\Chromedriver\chromedriver.exe')
+        self.driver.implicitly_wait(60)
         self.vars = {}
         self.session = SessionHelper(self)
         self.group = GroupHelper(self)
+
+    def is_valid(self):
+        try:
+            self.driver.current_url
+            return True
+        except:
+            return False
 
     def open_home_page(self):
         self.driver.get("https://skyt.qa.sharp.nixdev.co/")
