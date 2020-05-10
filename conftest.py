@@ -9,11 +9,10 @@ def app(request):
     global fixture
     if fixture is None:
         fixture = Application()
-        fixture.session.login(username="test0001push@gmail.com", password="plokijuh1")
     else:
         if not fixture.is_valid():
             fixture = Application()
-            fixture.session.login(username="test0001push@gmail.com", password="plokijuh1")
+    fixture.session.ensure_login(username="test0001push@gmail.com", password="plokijuh1")
     return fixture
 
 @pytest.fixture(scope="session", autouse=True)

@@ -6,6 +6,7 @@ class GroupHelper:
 
     def create(self, group):
         self.driver = self.app.driver
+        self.driver.find_element(By.CSS_SELECTOR, ".logo .logo__img").click()
         self.open_add_contact_page()
         self.fill_contact_form(group)
         # submit creation
