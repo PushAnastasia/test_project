@@ -52,3 +52,8 @@ class GroupHelper:
         self.fill_contact_form(new_group_data)
         # submit modification
         self.driver.find_element(By.CSS_SELECTOR, ".btn-save").click()
+
+    def count(self):
+        self.driver = self.app.driver
+        self.opend_address_book_page()
+        return len(self.driver.find_elements(By.CSS_SELECTOR, ".list-body .text-cell .icon-check"))
