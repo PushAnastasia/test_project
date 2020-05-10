@@ -25,11 +25,11 @@ class SessionHelper:
 
     def is_logged_in(self):
         self.driver = self.app.driver
-        return len(self.driver.find_elements(By.LINK_TEXT, "Hello,")) > 0
+        return len(self.driver.find_elements(By.CSS_SELECTOR, ".user-block .link-content")) > 0
 
     def is_logged_in_as(self, username):
         self.driver = self.app.driver
-        return self.driver.find_element(By.XPATH, "//b[contains(.,'test0001push@gmail.com')]").text == username
+        return self.driver.find_element(By.XPATH, "//b[contains(.,'Anastasiia')]").text == "Anastasiia"
 
     def ensure_login(self, username, password):
         self.driver = self.app.driver
