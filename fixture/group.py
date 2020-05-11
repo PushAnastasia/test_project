@@ -27,7 +27,7 @@ class GroupHelper:
 
     def inactive_first_contact(self):
         self.driver = self.app.driver
-        self.opend_address_book_page()
+        self.open_address_book_page()
         # select first contact
         self.driver.find_element(By.CSS_SELECTOR, ".list-body .text-cell .icon-check").click()
         # submit inactivation
@@ -35,14 +35,16 @@ class GroupHelper:
         self.driver.find_element(By.LINK_TEXT, "Set Inactive").click()
         self.driver.find_element(By.CSS_SELECTOR, ".popup-content .btn-delete").click()
 
-    def opend_address_book_page(self):
+    def open_address_book_page(self):
         self.driver = self.app.driver
+        if self.driver.current_url.endswith("AddressBook?customertype=0&groupid=null") and len(self.driver.find_elements(By.LINK_TEXT, "Add Contact")) > 0:
+            return
         self.driver.find_element(By.ID, "AddressBook").click()
         self.driver.find_element(By.ID, "AllContacts").click()
 
     def modify_first_contact(self, new_group_data):
         self.driver = self.app.driver
-        self.opend_address_book_page()
+        self.open_address_book_page()
         # select first contact
         self.driver.find_element(By.LINK_TEXT, "New Contact2").click()
         # open edit contact page
@@ -55,5 +57,5 @@ class GroupHelper:
 
     def count(self):
         self.driver = self.app.driver
-        self.opend_address_book_page()
+        self.open_address_book_page()
         return len(self.driver.find_elements(By.CSS_SELECTOR, ".list-body .text-cell .icon-check"))
