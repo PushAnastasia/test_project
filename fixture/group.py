@@ -1,4 +1,5 @@
 from selenium.webdriver.common.by import By
+from model.group import Group
 
 class GroupHelper:
     def __init__(self, app):
@@ -58,10 +59,14 @@ class GroupHelper:
     def count(self):
         self.driver = self.app.driver
         self.open_address_book_page()
-        return len(self.driver.find_elements(By.CSS_SELECTOR, ".list-body .text-cell .icon-check"))
+        return len(self.driver.find_elements(By.CSS_SELECTOR, ".list-body .text-cell. icon-check"))
 
     def get_contact_list(self):
         self.driver = self.app.driver
         self.open_address_book_page()
+        contacts = []
         for element in self.driver.find_elements(By.CSS_SELECTOR, ".list-body .col-organization"):
-            text =  element.get_text()
+            text =  element.text
+            id = element.find_element(By.CSS_SELECTOR, ".list-body .text-cell .checkbox-container .mvc-grid-checkbox").get_attribute("value")
+            contacts.append(Group(name=text, id=id))
+        return contacts
