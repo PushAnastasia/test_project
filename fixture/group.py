@@ -67,6 +67,6 @@ class GroupHelper:
         contacts = []
         for element in self.driver.find_elements(By.CSS_SELECTOR, ".list-body .col-organization"):
             text =  element.text
-            id = element.find_element(By.CSS_SELECTOR, ".list-body .text-cell .checkbox-container .mvc-grid-checkbox").get_attribute("value")
+    #        id = element.find_element(By.CSS_SELECTOR, ".list-body .col-checkbox .text-cell .checkbox-container .mvc-grid-checkbox").get_attribute("value")
             contacts.append(Group(name=text, id=id))
         return contacts
