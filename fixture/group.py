@@ -47,7 +47,7 @@ class GroupHelper:
         self.driver = self.app.driver
         self.open_address_book_page()
         # select first contact
-        self.driver.find_element(By.LINK_TEXT, "New Contact2").click()
+        self.driver.find_element(By.LINK_TEXT, "TestClient").click()
         # open edit contact page
         self.driver.find_element(By.CSS_SELECTOR, ".page-block .list-footer .btn-holder .btn-edit").click()
         self.driver.implicitly_wait(10)
@@ -59,7 +59,7 @@ class GroupHelper:
     def count(self):
         self.driver = self.app.driver
         self.open_address_book_page()
-        return len(self.driver.find_elements(By.CSS_SELECTOR, ".list-body .text-cell. icon-check"))
+        return len(self.driver.find_elements(By.CSS_SELECTOR, ".list-body .text-cell .icon-check"))
 
     def get_contact_list(self):
         self.driver = self.app.driver

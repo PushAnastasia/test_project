@@ -9,5 +9,8 @@ def test_createContact(app):
   assert len(old_contacts) + 1 == len(new_contacts)
 
 def test_createContactClient(app):
+  old_contacts = app.group.get_contact_list()
   app.group.create(Group(name="TestClient"))
+  new_contacts = app.group.get_contact_list()
+  assert len(old_contacts) + 1 == len(new_contacts)
 
