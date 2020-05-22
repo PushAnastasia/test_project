@@ -26,3 +26,8 @@ class Application:
 
     def destroy(self):
         self.driver.quit()
+
+    def open_director_page(self):
+        self.driver.find_element(By.ID, "Settings").click()
+        self.driver.find_element(By.LINK_TEXT, "People").click()
+
