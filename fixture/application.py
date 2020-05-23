@@ -2,6 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from fixture.session import SessionHelper
 from fixture.group import GroupHelper
+from fixture.director import DirectorHelper
 
 
 class Application:
@@ -29,6 +30,7 @@ class Application:
         self.driver.quit()
 
     def open_directors_page(self):
+    #    self.driver.get("https://skyt.qa.sharp.nixdev.co/17173/Settings/People")
         self.driver.find_element(By.ID, "Settings").click()
         self.driver.find_element(By.LINK_TEXT, "People").click()
 

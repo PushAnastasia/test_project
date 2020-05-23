@@ -10,9 +10,9 @@ class DirectorHelper:
     def change_field_value(self, field_name, text):
         self.driver = self.app.driver
         if text is not None:
-            self.driver.find_element(By.Name, field_name).click()
-            self.driver.find_element(By.Name, field_name).clear()
-            self.driver.find_element(By.Name, field_name).send_keys(test)
+            self.driver.find_element(By.NAME, field_name).click()
+            self.driver.find_element(By.NAME, field_name).clear()
+            self.driver.find_element(By.NAME, field_name).send_keys(test)
 
     director_cache = None
 
