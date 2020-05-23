@@ -12,6 +12,7 @@ class Application:
         self.vars = {}
         self.session = SessionHelper(self)
         self.group = GroupHelper(self)
+        self.director = DirectorHelper(self)
 
     def is_valid(self):
         try:
@@ -27,7 +28,7 @@ class Application:
     def destroy(self):
         self.driver.quit()
 
-    def open_director_page(self):
+    def open_directors_page(self):
         self.driver.find_element(By.ID, "Settings").click()
         self.driver.find_element(By.LINK_TEXT, "People").click()
 
