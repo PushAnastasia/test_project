@@ -21,7 +21,7 @@ class DirectorHelper:
             self.driver = self.app.driver
             self.app.open_directors_page()
             self.director_cache = []
-            for row in driver.find_elements(By.CSS_SELECTOR, ".list-body .col-firstname,lastname"):
+            for row in self.driver.find_elements(By.CSS_SELECTOR, ".list-body .col-firstname,lastname"):
                 names = row.find_element(By.CSS_SELECTOR, ".list-body .col-firstname,lastname").text.split()
                 firstname = names[0]
                 lastname = names[1]
