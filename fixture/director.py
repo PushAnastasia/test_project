@@ -21,11 +21,12 @@ class DirectorHelper:
             self.driver = self.app.driver
             self.app.open_directors_page()
             self.director_cache = []
-            for row in self.driver.find_elements(By.CSS_SELECTOR, ".list-body .col-firstname,lastname"):
-                names = row.find_element(By.CSS_SELECTOR, ".list-body .col-firstname,lastname").text.split()
-                firstname = names[0]
-                lastname = names[1]
-                id_string = row.find_element(By.TAG_NAME, "a").get_attribute("href")
+            for row in self.driver.find_elements(By.TAG_NAME, "td"):
+                cells = row.find_element(By.TAG_NAME, "td")
+                names = cells[1].test
+                firstname = names
+                lastname = names
+                id_string = row.find_element(By.TAG_NAME, "a").get_attribute("href").text
                 id = id_string[-4:-1]
                 self.director_cache.append(Director(firstname=firstname, lastname=lastname, id=id))
         return list(self.director_cache)
@@ -38,9 +39,9 @@ class DirectorHelper:
     def get_director_info_from_edit_page(self, index):
         self.driver = self.app.driver
         self.open_director_to_edit_by_index(index)
-        firstname = self.driver.find_element(By.Name, "FirstName").get_attribute("value")
-        lastname = self.driver.find_element(By.Name, "LastName").get_attribute("value")
-        id = self.driver.find_element(By.Name, "Id").get_attribute("value")
+        firstname = self.driver.find_element(By.NAME, "FirstName").get_attribute("value")
+        lastname = self.driver.find_element(By.NAME, "LastName").get_attribute("value")
+        id = self.driver.find_element(By.NAME, "Id").get_attribute("value")
         return Director(firstname=firstname, lastname=lastname, id=id)
 
 

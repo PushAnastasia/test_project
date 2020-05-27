@@ -30,7 +30,6 @@ class Application:
         self.driver.quit()
 
     def open_directors_page(self):
-    #    self.driver.get("https://skyt.qa.sharp.nixdev.co/17173/Settings/People")
         self.driver.find_element(By.ID, "Settings").click()
         self.driver.find_element(By.LINK_TEXT, "People").click()
 
