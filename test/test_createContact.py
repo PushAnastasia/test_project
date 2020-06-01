@@ -1,22 +1,23 @@
 # -*- coding: utf-8 -*-
 from model.group import Group
+import pytest
+import random
+import string
 
+def random_string(prefix, maxlen):
+    symbols = string.ascii_letters + string.digits + string.punctuation + " "*10
+    return prefix + "".join([random.choice(symbols) for i in range(random.randrange(maxlen))])
 
-def test_createContact(app):
-  old_contacts = app.group.get_contact_list()
-  contact = Group(name="TestContact")
-  app.group.create(contact)
-  assert len(old_contacts) + 1 == app.group.count()
-  new_contacts = app.group.get_contact_list()
-  old_contacts.append(contact)
-  assert old_contacts == new_contacts
+testdata = [Group(name="TestClient")] + [
+    Group(name= random_string("contact", 10)) for i in range(3)
+  ]
 
-#def test_createContactClient(app):
-#  old_contacts = app.group.get_contact_list()
-#  contact = Group(name="TestClient")
-#  app.group.create(contact)
-#  new_contacts = app.group.get_contact_list()
-#  assert len(old_contacts) + 1 == len(new_contacts)
-#  old_contacts.append(contact)
-#  assert sorted(old_contacts) == sorted(new_contacts)
+@pytest.mark.parametrize("group", testdata, ids=[repr(x) for x in testdata])
+def test_createContact(app, group):
+       old_contacts = app.group.get_contact_list()
+       app.group.create(group)
+       assert len(old_contacts) + 1 == app.group.count()
+       new_contacts = app.group.get_contact_list()
+       old_contacts.append(group)
+       assert old_contacts == new_contacts
 

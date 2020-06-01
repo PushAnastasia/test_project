@@ -21,14 +21,11 @@ class DirectorHelper:
             self.driver = self.app.driver
             self.app.open_directors_page()
             self.director_cache = []
-            for row in self.driver.find_elements(By.TAG_NAME, "td"):
-                cells = row.find_element(By.TAG_NAME, "td")
-                names = cells[1].test
-                firstname = names
-                lastname = names
+            for row in self.driver.find_elements(By.LINK_TEXT, 'JohnDoe'):
+                fullname = row.find_element(By.LINK_TEXT, 'JohnDoe').text
                 id_string = row.find_element(By.TAG_NAME, "a").get_attribute("href").text
                 id = id_string[-4:-1]
-                self.director_cache.append(Director(firstname=firstname, lastname=lastname, id=id))
+                self.director_cache.append(Director(fullname_from_directors_page=fullname, id=id))
         return list(self.director_cache)
 
     def open_director_to_edit_by_index(self, index):
