@@ -7,8 +7,15 @@ from fixture.director import DirectorHelper
 
 class Application:
 
-    def __init__(self):
-        self.driver = webdriver.Chrome('C:\Program Files\Chromedriver\chromedriver.exe')
+    def __init__(self, browser="chrome"):
+        if browser == "chrome":
+            self.driver = webdriver.Chrome('C:\Program Files\Chromedriver\chromedriver.exe')
+        elif browser == "firefox":
+            self.driver = webdriver.Firefox()
+        elif browser == "ie":
+            self.driver = webdriver.Ie('C:\Program Files\IEdriver\IEDriverServer.exe')
+        else:
+            raise ValueError("Unrecognized browser %s" % browser)
         self.driver.implicitly_wait(5)
         self.vars = {}
         self.session = SessionHelper(self)
