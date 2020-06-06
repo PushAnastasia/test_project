@@ -7,11 +7,11 @@ from fixture.director import DirectorHelper
 
 class Application:
 
-    def __init__(self, browser="chrome"):
+    def __init__(self, browser, base_url):
         if browser == "chrome":
             self.driver = webdriver.Chrome('C:\Program Files\Chromedriver\chromedriver.exe')
         elif browser == "firefox":
-            self.driver = webdriver.Firefox()
+            self.driver = webdriver.Firefox(executable_path=r'C:\Program Files\geckodriver\geckodriver.exe')
         elif browser == "ie":
             self.driver = webdriver.Ie('C:\Program Files\IEdriver\IEDriverServer.exe')
         else:
@@ -21,6 +21,7 @@ class Application:
         self.session = SessionHelper(self)
         self.group = GroupHelper(self)
         self.director = DirectorHelper(self)
+        self.base_url=base_url
 
     def is_valid(self):
         try:
@@ -30,7 +31,7 @@ class Application:
             return False
 
     def open_home_page(self):
-        self.driver.get("https://skyt.qa.sharp.nixdev.co/")
+        self.driver.get(self.base_url)
         self.driver.set_window_size(1936, 1056)
 
     def destroy(self):
